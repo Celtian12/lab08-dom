@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lista interactiva de tareas creada con JavaScript, DOM y objetos."
+    />
+    <title>Mis tareas | Lab 08 DOM</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Arial, sans-serif;
+        color: #172033;
+        background: #f3f5f9;
+      }
+
+      body {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 32px 20px;
+      }
+
+      main {
+        padding: 28px;
+        background: #fff;
+        border: 1px solid #dce1ea;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgb(23 32 51 / 8%);
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+
+      .solo-lectura {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      form {
+        display: flex;
+        gap: 8px;
+      }
+
+      input[type="text"] {
+        flex: 1;
+        min-width: 0;
+        padding: 10px 12px;
+        border: 1px solid #aeb8c9;
+        border-radius: 6px;
+        font: inherit;
+      }
+
+      button {
+        padding: 9px 12px;
+        border: 0;
+        border-radius: 6px;
+        background: #174ea6;
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #103c82;
+      }
+
+      button:focus-visible,
+      input:focus-visible {
+        outline: 3px solid #8bb8ff;
+        outline-offset: 2px;
+      }
+
+      .error {
+        min-height: 1.25em;
+        color: #b42318;
+      }
+
+      #listaTareas {
+        display: grid;
+        gap: 10px;
+        margin: 20px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tarea {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        border: 1px solid #dce1ea;
+        border-radius: 8px;
+      }
+
+      .tarea input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+      }
+
+      .tarea-texto {
+        flex: 1;
+        overflow-wrap: anywhere;
+      }
+
+      .tarea-texto.completada {
+        color: #657087;
+        text-decoration: line-through;
+      }
+
+      .tarea button {
+        flex: 0 0 auto;
+      }
+
+      .tarea .eliminar {
+        background: #a4262c;
+      }
+
+      .tarea .eliminar:hover {
+        background: #801d22;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      @media (max-width: 520px) {
+        main {
+          padding: 20px;
+        }
+
+        .tarea {
+          flex-wrap: wrap;
+        }
+
+        .tarea .editor {
+          flex-basis: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Mis tareas</h1>
+      <p>Agrega una tarea y luego márcala, edítala o elimínala.</p>
+
+      <form id="formularioTarea" novalidate>
+        <label for="tituloTarea" class="solo-lectura">Nueva tarea</label>
+        <input
+          id="tituloTarea"
+          name="titulo"
+          type="text"
+          maxlength="100"
+          placeholder="¿Qué necesitas hacer?"
+          autocomplete="off"
+          required
+        />
+        <button type="submit">Agregar</button>
+      </form>
+      <p id="mensaje" class="error" role="status" aria-live="polite"></p>
+      <p id="resumen" aria-live="polite">No hay tareas todavía.</p>
+      <ul id="listaTareas" aria-label="Tareas"></ul>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
